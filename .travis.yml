@@ -1,4 +1,7 @@
 language: java
+
+install: true
+
 jdk:
   - oraclejdk8
 
@@ -7,11 +10,11 @@ before_install:
 
 
 script:
-  - ./gradle wrapper --gradle-version 2.13
+  - ./gradlew build
 
-"group": "stable",
-  "dist": "precise",
-  "os": "linux"
+# "group": "stable",
+#   "dist": "precise",
+#   "os": "linux"
 
 # before_cache:
 # - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
