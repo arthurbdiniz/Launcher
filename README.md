@@ -1,5 +1,12 @@
 # Launcher
 
+[![Build Status](https://travis-ci.org/arthurbdiniz/Launcher.svg?branch=master)](https://travis-ci.org/arthurbdiniz/Launcher)
+![Maven Central Latest](https://maven-badges.herokuapp.com/maven-central/net.wasdev.wlp.gradle.plugins/liberty-gradle-plugin/badge.svg)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1634f57e864d44a797baaa707472ff87)](https://www.codacy.com/app/arthurbdiniz/Launcher?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=arthurbdiniz/Launcher&amp;utm_campaign=Badge_Grade)
+[![JDK](https://img.shields.io/badge/JDK-8-brightgreen.svg)]()
+[![Version](https://img.shields.io/badge/version-1.0-blue.svg)]()
+
+
 
 ### Install Gradle
 
