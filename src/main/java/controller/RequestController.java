@@ -1,5 +1,7 @@
 package controller;
 
+import model.*;
+
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
@@ -12,7 +14,10 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.io.IOException;
-
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import listener.*;
 
 
@@ -20,20 +25,27 @@ public class RequestController {
 
   private HttpURLConnection httpUrlConnection;
   private URL url;
+  private URL baseUrl;
+  private String path;
+
 
   public RequestController() {}
 
-  public  void getRequest() throws IOException {
+  public BuildObject getVersionRequest(String path) throws IOException, ParseException {
+    this.path = path;
     initConnection();
     setConnectionTimeOut();
     setConnectionHeader();
 
-    responseReader();
+    String response = responseReader();
+    // System.out.println(response);
     disconnect();
+
+    return responseToObject(response);
   }
 
   private void initConnection() throws IOException {
-    url =  new URL("http://ec2-54-233-228-194.sa-east-1.compute.amazonaws.com:3000/builds/Windows");
+    url =  new URL("http://ec2-54-233-228-194.sa-east-1.compute.amazonaws.com:3000" + path);
     httpUrlConnection = (HttpURLConnection) url.openConnection();
     httpUrlConnection.setRequestMethod("GET");
   }
@@ -62,7 +74,7 @@ public class RequestController {
     dataOutputStream.close();
   }
 
-  private void responseReader() throws IOException {
+  private String responseReader() throws IOException {
     int status = httpUrlConnection.getResponseCode();
     BufferedReader in = new BufferedReader(
     new InputStreamReader(httpUrlConnection.getInputStream()));
@@ -70,9 +82,9 @@ public class RequestController {
     StringBuffer content = new StringBuffer();
     while ((inputLine = in.readLine()) != null) {
         content.append(inputLine);
-        System.out.println(inputLine);
     }
     in.close();
+    return content.toString();
   }
 
   private static String getParamsString(Map<String, String> params)
@@ -90,6 +102,33 @@ public class RequestController {
         return resultString.length() > 0
           ? resultString.substring(0, resultString.length() - 1)
           : resultString;
+  }
+
+  private BuildObject responseToObject(String response) throws ParseException{
+    JSONParser parser = new JSONParser();
+
+    JSONArray json = (JSONArray) parser.parse(response);
+    JSONObject jsonComplete = (JSONObject) json.get(0);
+
+    JSONObject jsonBuild = (JSONObject) jsonComplete.get("build");
+    JSONObject jsonFile = (JSONObject) jsonComplete.get("file");
+
+    // Create File
+    FileObject file = new FileObject();
+    file.setId(jsonFile.get("id").toString());
+    file.setFileName(jsonFile.get("file_name").toString());
+    file.setFileSize(jsonFile.get("file_size").toString());
+    file.setUrl(jsonFile.get("url").toString());
+
+    // Create Build
+    BuildObject build = new BuildObject();
+    build.setId(jsonBuild.get("id").toString());
+    build.setVersion(jsonBuild.get("version").toString());
+    build.setPlataform(jsonBuild.get("plataform").toString());
+    build.setFile(file);
+
+    return build;
+
   }
 
 }

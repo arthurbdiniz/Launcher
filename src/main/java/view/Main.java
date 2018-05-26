@@ -2,8 +2,10 @@ package view;
 
 import controller.*;
 import helper.*;
+import model.*;
 import java.io.IOException;
-import java.io.File;
+
+import org.json.simple.parser.ParseException;
 
 public class Main {
 
@@ -14,47 +16,46 @@ public class Main {
 
     final Gui gui = new Gui();
 
-    //new downloadController().downloadTask();
-    download();
-    // version();
-    try {
-      File rootDir = new File("src/build/");
-      File sampleZipFile = new File("src/build/file.zip");
-
-      new UnzipFile().unzip(sampleZipFile, rootDir);
-    }catch (Exception e) {
-
-    }
-    
+    Main main =  new Main();
+    main.run();
   }
 
-  private static void download() {
+  private static BuildObject build;
+  private FileController fileController;
+
+  private void run() {
+    fileController = new FileController();
+
+    //download();
+
+    updateVersion();
+
+    if (build != null){
+      try {
+        fileController.validateVersion(build);
+      }catch (Exception e) {
+
+      }
+    }
+  }
+
+  private static void updateVersion() {
     String os = new OSValidator().getOS();
-    System.out.println(os);
 
     //Verify OS to download exe for especific system
-    if(os == "win"){
-      so_path_url = "/file_objects/79/windows.zip";
-    }else if(os == "uni") {
-      so_path_url = "/file_objects/80/linux.zip";
-    }else if(os == "osx") {
-      so_path_url = "/file_objects/81/mac.zip";
+    if(os == "win") {
+      so_path_url = "/builds/latest_stable/Windows";
+    } else if(os == "uni") {
+      so_path_url = "/builds/latest_stable/Linux";
+    } else if(os == "osx") {
+      so_path_url = "/builds/latest_stable/OSX";
     } else {
       //erro
     }
 
     try {
-      new JavaDownloadFileFromUrl().downloadUsingNIO(base_url + so_path_url, "src/build/file.zip");
-
-    } catch (IOException e) {
-           e.printStackTrace();
-    }
-  }
-
-  private void version() {
-    try {
-        new RequestController().getRequest();
-    } catch(IOException e){
+        build = new RequestController().getVersionRequest(so_path_url);
+    } catch(IOException | ParseException e){
       e.printStackTrace();
     }
   }

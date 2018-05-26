@@ -13,9 +13,9 @@ public class VerifyVersionController{
 
     public void runValidation() {
       //Request Download
-      try {
-        requestController.getRequest();
-      }catch(IOException e) {}
+      // try {
+      //   requestController.getRequest();
+      // }catch(IOException e) {}
 
     }
 

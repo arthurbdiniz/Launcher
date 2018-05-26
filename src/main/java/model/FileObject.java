@@ -1,13 +1,13 @@
 package model;
 
-public class File {
+public class FileObject {
 
   private String id;
   private String fileName;
   private String fileSize;
   private String url;
 
-  public File() {
+  public FileObject() {
 
   }
 
@@ -33,6 +33,14 @@ public class File {
 
   public void setFileSize(String fileSize) {
       this.fileSize = fileSize;
+  }
+
+  public String getUrl() {
+      return url;
+  }
+
+  public void setUrl(String url) {
+      this.url = url;
   }
 
 }

@@ -5,7 +5,7 @@ public class OSValidator {
     private static String OS = System.getProperty("os.name").toLowerCase();
 
     public OSValidator() {
-      System.out.println(OS);
+      System.out.println("SO: " + OS);
 
       // if (isWindows()) {
       //     System.out.println("This is Windows");

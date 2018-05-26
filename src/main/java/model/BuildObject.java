@@ -1,13 +1,13 @@
 package model;
 
-public class Build {
+public class BuildObject {
 
   private String id;
   private String version;
-  private File file;
+  private String plataform;
+  private FileObject file;
 
-  public Build() {
-
+  public BuildObject() {
   }
 
   public String getId() {
@@ -26,12 +26,20 @@ public class Build {
       this.version = version;
   }
 
-  public File getFile() {
+  public FileObject getFile() {
       return file;
   }
 
-  public void setFile(File file) {
+  public void setFile(FileObject file) {
       this.file = file;
+  }
+
+  public String getPlataform() {
+      return plataform;
+  }
+
+  public void setPlataform(String plataform) {
+      this.plataform = plataform;
   }
 
 }
