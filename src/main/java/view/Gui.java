@@ -25,10 +25,10 @@ public class Gui {
   JProgressBar progressBar;
 
   public Gui() {
-    
+
     frame =  new JFrame();
 
-    frame.setIconImage(new ImageIcon("test.png").getImage());
+    // frame.setIconImage(new ImageIcon("test.png").getImage());
 
     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
