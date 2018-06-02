@@ -67,19 +67,28 @@ public class FileController {
       }
     }
 
-
     private String readVersionFromFile() {
-      File f = new File("ver.txt");
-      try {
-          List<String> lines = Files.readAllLines(Paths.get(f.getAbsolutePath()), StandardCharsets.UTF_8);
-          for (String str : lines){
-              System.out.println("Version: " + str);
-              return str;
-          }
-      } catch (IOException e) {
-          e.printStackTrace();
+
+      String version = "";
+
+      if(new File("ver.txt").isFile()) {
+        File f = new File("ver.txt");
+
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(f.getAbsolutePath()), StandardCharsets.UTF_8);
+            for (String str : lines){
+                System.out.println("Version: " + str);
+                version = str;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+      }else {
+        version = "0.0";
       }
-      return "";
+
+      return version;
     }
 
     private void writeVersionToFile(String version) throws IOException{
