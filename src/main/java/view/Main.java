@@ -17,13 +17,13 @@ public class Main {
     final Gui gui = new Gui();
 
     Main main =  new Main();
-    main.run();
+    main.run(gui);
   }
 
   private static BuildObject build;
   private FileController fileController;
 
-  private void run() {
+  private void run(Gui gui) {
     fileController = new FileController();
 
     updateVersion();
@@ -35,6 +35,8 @@ public class Main {
 
       }
     }
+    gui.startButton.setEnabled(true);
+    gui.loadingLabel.setVisible(false);
   }
 
   private static void updateVersion() {
