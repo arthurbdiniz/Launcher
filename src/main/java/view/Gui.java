@@ -6,7 +6,6 @@ import javax.swing.JButton;
 import javax.swing.JProgressBar;
 import javax.swing.WindowConstants;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.event.*;
@@ -19,17 +18,10 @@ import view.*;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.Shape;
 import java.awt.Color;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
-import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 public class Gui {
 
@@ -57,8 +49,6 @@ public class Gui {
 
       @Override
       public void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-
         //circle 1
         g.setColor(Color.ORANGE);
         g.fillOval(100, 200, 200, 200);

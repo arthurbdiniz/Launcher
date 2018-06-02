@@ -3,7 +3,6 @@ package listener;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.io.IOException;
 
 import helper.*;
 
@@ -17,20 +16,18 @@ public  class StartButtonListener implements ActionListener {
         String os = new OSValidator().getOS();
 
         //Verify OS to download exe for especific system
-        if(os == "win") {
+        if("win".equals(os)) {
           exe_path = "download/Build/windows/Reabilitacao-Motora";
-        } else if(os == "uni") {
+        } else if("uni".equals(os)) {
           exe_path = "download/Build/linux/Reabilitacao-Motora.x86_64";
-        } else if(os == "osx") {
+        } else if("osx".equals(os)) {
           exe_path = "download/Build/osx/Reabilitacao-Motora.app";
-        } else {
-          //erro
         }
 
         try {
           new FilePermission(exe_path).setAll(true);
           // Runtime.getRuntime().exec(exe_path);
-          Process process =  new ProcessBuilder(exe_path).start();
+          new ProcessBuilder(exe_path).start();
         }catch (Exception e) {
 
         }
