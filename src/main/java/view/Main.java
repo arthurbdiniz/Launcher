@@ -26,8 +26,6 @@ public class Main {
   private void run() {
     fileController = new FileController();
 
-    //download();
-
     updateVersion();
 
     if (build != null){

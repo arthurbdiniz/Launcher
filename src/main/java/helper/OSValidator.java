@@ -6,18 +6,6 @@ public class OSValidator {
 
     public OSValidator() {
       System.out.println("SO: " + OS);
-
-      // if (isWindows()) {
-      //     System.out.println("This is Windows");
-      // } else if (isMac()) {
-      //     System.out.println("This is Mac");
-      // } else if (isUnix()) {
-      //     System.out.println("This is Unix or Linux");
-      // } else if (isSolaris()) {
-      //     System.out.println("This is Solaris");
-      // } else {
-      //     System.out.println("Your OS is not support!!");
-      // }
     }
 
     public static boolean isWindows() {

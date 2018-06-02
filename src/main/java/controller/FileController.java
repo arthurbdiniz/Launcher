@@ -48,7 +48,7 @@ public class FileController {
     private static void download(String path) {
       System.out.println("Downloading...");
       try {
-        new JavaDownloadFileFromUrl().downloadUsingNIO(base_url + path, "src/build/file.zip");
+        new JavaDownloadFileFromUrl().downloadUsingNIO(base_url + path, "file.zip");
 
       } catch (IOException e) {
              e.printStackTrace();
@@ -58,8 +58,8 @@ public class FileController {
     private void unzipFolder() {
         System.out.println("Unziping");
       try {
-        File rootDir = new File("src/build/");
-        File sampleZipFile = new File("src/build/file.zip");
+        File rootDir = new File("download");
+        File sampleZipFile = new File("file.zip");
 
         new UnzipFile().unzip(sampleZipFile, rootDir);
       }catch (Exception e) {
@@ -69,7 +69,7 @@ public class FileController {
 
 
     private String readVersionFromFile() {
-      File f = new File(System.getProperty("user.dir") + "/ver.txt");
+      File f = new File("ver.txt");
       try {
           List<String> lines = Files.readAllLines(Paths.get(f.getAbsolutePath()), StandardCharsets.UTF_8);
           for (String str : lines){
@@ -84,7 +84,7 @@ public class FileController {
 
     private void writeVersionToFile(String version) throws IOException{
 
-      File f = new File(System.getProperty("user.dir") + "/ver.txt");
+      File f = new File("ver.txt");
       if (f.exists()) f.delete();
       f.createNewFile();
       PrintWriter writer = new PrintWriter(f.getAbsoluteFile(), "UTF-8");
