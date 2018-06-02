@@ -22,6 +22,7 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 public class Gui {
 
@@ -29,7 +30,7 @@ public class Gui {
   JPanel bottomPanel;
   JButton siteButton;
   JButton startButton;
-  JProgressBar progressBar;
+  JLabel loadingLabel;
 
   public Gui() {
 
@@ -45,42 +46,7 @@ public class Gui {
     frame.setTitle("Launcher");
     frame.setBounds(width / 2 - 500, height / 2 - 400, 1000, 700);
 
-    bottomPanel = new JPanel() {
-
-      @Override
-      public void paintComponent(Graphics g) {
-        //circle 1
-        g.setColor(Color.ORANGE);
-        g.fillOval(100, 200, 200, 200);
-
-        //text 1
-        g.setColor(Color.WHITE);
-        g.drawString("Verificando",175,300);
-
-        //line 1
-        g.setColor(Color.ORANGE);
-        g.drawLine(100, 300, 700, 300);
-
-        //circle 2
-        g.setColor(Color.ORANGE);
-        g.fillOval(400, 200, 200, 200);
-
-        //text 2
-        g.setColor(Color.WHITE);
-        g.drawString("Atualizando",475,300);
-
-        //circle 3
-        g.setColor(Color.ORANGE);
-        g.fillOval(700, 200, 200, 200);
-
-        //text 3
-        g.setColor(Color.WHITE);
-        g.drawString("Pronto",775,300);
-
-      }
-    };
-
-
+    bottomPanel = new JPanel();
 
     FlowLayout experimentLayout = new FlowLayout();
     bottomPanel.setLayout(experimentLayout);
@@ -90,14 +56,13 @@ public class Gui {
 
     startButton = new JButton("Start");
     startButton.addActionListener(new StartButtonListener());
+    startButton.setEnabled(false);
 
-    progressBar = new JProgressBar(0);
-    progressBar.setBounds(0, 0, 400, 50);
-    progressBar.setValue(0);
+    loadingLabel =  new JLabel("Carregando...");
 
     bottomPanel.add(siteButton);
-    bottomPanel.add(progressBar);
     bottomPanel.add(startButton);
+    bottomPanel.add(loadingLabel);
 
     frame.add(bottomPanel);
 
