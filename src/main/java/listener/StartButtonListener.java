@@ -18,21 +18,23 @@ public  class StartButtonListener implements ActionListener {
 
         //Verify OS to download exe for especific system
         if(os == "win") {
-          exe_path = "src/build/Build/windows/Reabilitacao-Motora.exe";
+          exe_path = "download/Build/windows/Reabilitacao-Motora";
         } else if(os == "uni") {
-          exe_path = "src/build/Build/linux/Reabilitacao-Motora.x86_64";
+          exe_path = "download/Build/linux/Reabilitacao-Motora.x86_64";
         } else if(os == "osx") {
-          exe_path = "src/build/Build/osx/Reabilitacao-Motora.app";
+          exe_path = "download/Build/osx/Reabilitacao-Motora.app";
         } else {
           //erro
         }
 
         try {
           new FilePermission(exe_path).setAll(true);
-
-          Runtime.getRuntime().exec(exe_path);
+          // Runtime.getRuntime().exec(exe_path);
+          Process process =  new ProcessBuilder(exe_path).start();
         }catch (Exception e) {
 
         }
+
+
     }
 }
