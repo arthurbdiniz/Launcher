@@ -6,6 +6,9 @@ import javax.swing.JButton;
 import javax.swing.JProgressBar;
 import javax.swing.WindowConstants;
 import javax.swing.Icon;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+
 import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.event.*;
@@ -19,10 +22,17 @@ import view.*;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Component;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 public class Gui {
 
@@ -48,8 +58,9 @@ public class Gui {
 
     bottomPanel = new JPanel();
 
-    FlowLayout experimentLayout = new FlowLayout();
+    BorderLayout experimentLayout = new BorderLayout();
     bottomPanel.setLayout(experimentLayout);
+    bottomPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
     siteButton = new JButton("Site");
     siteButton.addActionListener(new SiteButtonListener());
@@ -57,14 +68,28 @@ public class Gui {
     startButton = new JButton("Start");
     startButton.addActionListener(new StartButtonListener());
     startButton.setEnabled(false);
+    startButton.setPreferredSize(new Dimension(80, 40));
 
     loadingLabel =  new JLabel("Carregando...");
 
-    bottomPanel.add(siteButton);
-    bottomPanel.add(startButton);
+    bottomPanel.add(siteButton, BorderLayout.WEST);
     bottomPanel.add(loadingLabel);
+    bottomPanel.add(startButton,  BorderLayout.EAST);
 
-    frame.add(bottomPanel);
+    bottomPanel.setBackground(new Color(240, 95, 64));
+
+    JFXPanel jfxPanel = new JFXPanel();
+    frame.add(jfxPanel, BorderLayout.CENTER);
+
+    // Creation of scene and future interactions with JFXPanel
+    // should take place on the JavaFX Application Thread
+    Platform.runLater(() -> {
+        WebView webView = new WebView();
+        jfxPanel.setScene(new Scene(webView));
+        webView.getEngine().load("https://fga-gpp-mds.github.io/2018.1-Reabilitacao-Motora/");
+    });
+
+    frame.add(bottomPanel, BorderLayout.PAGE_END);
 
     frame.setVisible(true);
 
