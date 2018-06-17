@@ -52,6 +52,7 @@ public class Gui {
   JLabel gitButton;
   JButton startButton;
   JLabel loadingLabel;
+  JProgressBar progressBar;
 
   public Gui() {
 
@@ -70,6 +71,7 @@ public class Gui {
     bottomPanel = new JPanel();
 
     BorderLayout experimentLayout = new BorderLayout();
+    experimentLayout.setVgap(10);
     bottomPanel.setLayout(experimentLayout);
     bottomPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
@@ -109,8 +111,15 @@ public class Gui {
 
     loadingLabel =  new JLabel("Carregando...");
 
+    progressBar = new JProgressBar();
+    progressBar.setSize(new Dimension(80, 20));
+    progressBar.setStringPainted(true);
+    progressBar.setValue(50);
+    progressBar.setString("50%");
+
     bottomPanel.add(gitButton, BorderLayout.WEST);
-    bottomPanel.add(loadingLabel);
+    // bottomPanel.add(loadingLabel);
+    bottomPanel.add(progressBar, BorderLayout.PAGE_END);
     bottomPanel.add(startButton,  BorderLayout.EAST);
 
     bottomPanel.setBackground(new Color(240, 95, 64));
