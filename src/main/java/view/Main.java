@@ -24,7 +24,7 @@ public class Main {
   private FileController fileController;
 
   private void run(Gui gui) {
-    fileController = new FileController();
+    fileController = new FileController(gui);
 
     updateVersion();
 
@@ -35,6 +35,8 @@ public class Main {
 
       }
     }
+    gui.progressBar.setString("100%");
+    gui.progressBar.setValue(100);
     gui.startButton.setEnabled(true);
     gui.loadingLabel.setVisible(false);
   }

@@ -52,7 +52,7 @@ public class Gui {
   JLabel gitButton;
   JButton startButton;
   JLabel loadingLabel;
-  JProgressBar progressBar;
+  public JProgressBar progressBar;
 
   public Gui() {
 
@@ -114,8 +114,8 @@ public class Gui {
     progressBar = new JProgressBar();
     progressBar.setSize(new Dimension(80, 20));
     progressBar.setStringPainted(true);
-    progressBar.setValue(50);
-    progressBar.setString("50%");
+
+
 
     bottomPanel.add(gitButton, BorderLayout.WEST);
     // bottomPanel.add(loadingLabel);
