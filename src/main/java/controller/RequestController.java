@@ -45,7 +45,7 @@ public class RequestController {
   }
 
   private void initConnection() throws IOException {
-    url =  new URL("http://ec2-54-233-228-194.sa-east-1.compute.amazonaws.com:3000" + path);
+    url =  new URL("http://ec2-18-231-174-28.sa-east-1.compute.amazonaws.com:3000" + path);
     httpUrlConnection = (HttpURLConnection) url.openConnection();
     httpUrlConnection.setRequestMethod("GET");
   }

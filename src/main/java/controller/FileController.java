@@ -16,7 +16,7 @@ import helper.*;
 
 public class FileController {
 
-    static String base_url = "http://ec2-54-233-228-194.sa-east-1.compute.amazonaws.com:3000";
+    static String base_url = "http://ec2-18-231-174-28.sa-east-1.compute.amazonaws.com:3000";
 
     public FileController() {} //Construtor
 
