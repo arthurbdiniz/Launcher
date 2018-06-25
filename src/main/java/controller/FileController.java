@@ -13,12 +13,18 @@ import java.io.File;
 import controller.*;
 import java.io.IOException;
 import helper.*;
+import view.*;
+
+import model.*;
 
 public class FileController {
 
-    static String base_url = "http://ec2-54-233-228-194.sa-east-1.compute.amazonaws.com:3000";
+    static String base_url = "http://ec2-18-231-174-28.sa-east-1.compute.amazonaws.com:3000";
+    Gui gui = null;
 
-    public FileController() {} //Construtor
+    public FileController(Gui gui) {
+      this.gui = gui;
+    }
 
     public void validateVersion(BuildObject build) {
       String versionFromFile = readVersionFromFile();
@@ -28,8 +34,25 @@ public class FileController {
       if(versionFromSite.equals(versionFromFile)){
         //nothing
         System.out.println("OK");
+
       }else {
         //download
+        new Thread() {
+            @Override
+            public void run() {
+              for (int i = 0;i < 95 ; i++ ) {
+                gui.progressBar.setValue(i);
+                gui.progressBar.setString(i + "%");
+                try {
+                    Thread.sleep(100);
+                }catch (Exception e) {
+
+                }
+              }
+
+            }
+        }.start();
+
         System.out.println("Outdated");
         System.out.println("Updating to version " + build.getVersion());
         FileObject file = build.getFile();

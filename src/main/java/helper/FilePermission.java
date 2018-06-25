@@ -27,7 +27,7 @@ public class FilePermission {
       file.setExecutable(allow);
       file.setWritable(allow);
       file.setReadable(allow);
-      getAllStatus();
+      //getAllStatus();
     }
 
     public void getExecuteStatus() {
